@@ -1,0 +1,48 @@
+services:
+  spark-master:
+    image: spark:3.5.0
+    command: ../sbin/start-master.sh
+    environment:
+      - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
+      - SPARK_MASTER_HOST=${SPARK_MASTER_HOST}
+    ports:
+      - 9090:8080
+    
+  spark-worker-a:
+    image: spark:3.5.0
+    environment:
+      - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
+      - SPARK_WORKER_WEBUI_PORT=9091
+    depends_on:
+      - spark-master
+    command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
+
+  spark-worker-b:
+    image: spark:3.5.0
+    environment:
+      - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
+      - SPARK_WORKER_WEBUI_PORT=9092
+    depends_on:
+      - spark-master
+    command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
+  
+  postgres:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+  
+  jupyter:
+    build: ./src/
+    ports:
+
+
+    
+
+
+    
