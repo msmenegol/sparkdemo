@@ -6,4 +6,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN rm requirements.txt
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["jupyter", "lab", "--allow-root"]
