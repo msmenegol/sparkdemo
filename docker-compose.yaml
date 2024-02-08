@@ -7,6 +7,7 @@ services:
       - SPARK_MASTER_HOST=${SPARK_MASTER_HOST}
     ports:
       - 9090:8080
+      - 7077:7077
     
   spark-worker-a:
     image: spark:3.5.0
