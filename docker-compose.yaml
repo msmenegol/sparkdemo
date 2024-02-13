@@ -1,6 +1,6 @@
 services:
   spark-master:
-    image: spark:3.5.0
+    image: spark:3.5.0-python3
     command: ../sbin/start-master.sh
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
@@ -10,7 +10,7 @@ services:
       - 7077:7077
     
   spark-worker-a:
-    image: spark:3.5.0
+    image: spark:3.5.0-python3
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9091
@@ -19,7 +19,7 @@ services:
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
 
   spark-worker-b:
-    image: spark:3.5.0
+    image: spark:3.5.0-python3
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9092
