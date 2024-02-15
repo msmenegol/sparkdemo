@@ -5,3 +5,5 @@ Small demo of how to set up and use spark.
 First, we set up a small spark cluster locally.
 
 Then, we run a small data trasformation task on a python notebook using the cluster that was just set up.
+
+The data used is a subset of the NYC taxi trips dataset, downloaded from [maven analytics data playground](https://mavenanalytics.io/data-playground).

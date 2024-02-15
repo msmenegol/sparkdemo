@@ -7,13 +7,16 @@ services:
       - SPARK_MASTER_HOST=${SPARK_MASTER_HOST}
     ports:
       - 9090:8080
-      - 7077:7077
     
   spark-worker-a:
     image: spark:3.5.0-python3
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9091
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_DRIVER_MEMORY=1G
+      - SPARK_EXECUTOR_MEMORY=1G
     depends_on:
       - spark-master
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
@@ -23,16 +26,21 @@ services:
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9092
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_DRIVER_MEMORY=1G
+      - SPARK_EXECUTOR_MEMORY=1G
     depends_on:
       - spark-master
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
   
   postgres:
-    image: postgres:16
+    image: postgres:15
     ports:
       - 5432:5432
     volumes:
-      - ./data/:/var/lib/postgresql/data
+      - ./db/demo_db.sql:/demo_db.sql
+      - ./db/restore.sh:/docker-entrypoint-initdb.d/restore.sh
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_USER=${DB_USER}
@@ -42,7 +50,8 @@ services:
     build: ./src/
     volumes:
       - ./src:/app
-    network_mode: host
+    ports:
+      - 8888:8888
 
 
     
