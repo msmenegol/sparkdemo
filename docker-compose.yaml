@@ -16,8 +16,9 @@ services:
       - SPARK_WORKER_WEBUI_PORT=9091
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=6G
-      - SPARK_DRIVER_MEMORY=6G
-      - SPARK_EXECUTOR_MEMORY=6G
+      - SPARK_DRIVER_MEMORY=3G
+    ports:
+      - 9091:9091
     depends_on:
       - spark-master
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
