@@ -15,7 +15,6 @@ services:
       - SPARK_WORKER_WEBUI_PORT=9091
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=2G
-      - SPARK_DRIVER_MEMORY=1G
     ports:
       - 9091:9091
     depends_on:
@@ -29,7 +28,6 @@ services:
       - SPARK_WORKER_WEBUI_PORT=9092
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=2G
-      - SPARK_DRIVER_MEMORY=1G
     ports:
       - 9092:9092
     depends_on:
