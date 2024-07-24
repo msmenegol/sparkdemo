@@ -14,9 +14,10 @@ services:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9091
       - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_MEMORY=2G
       - SPARK_DRIVER_MEMORY=1G
-      - SPARK_EXECUTOR_MEMORY=1G
+    ports:
+      - 9091:9091
     depends_on:
       - spark-master
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
@@ -27,9 +28,10 @@ services:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9092
       - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_MEMORY=2G
       - SPARK_DRIVER_MEMORY=1G
-      - SPARK_EXECUTOR_MEMORY=1G
+    ports:
+      - 9092:9092
     depends_on:
       - spark-master
     command: '../sbin/start-worker.sh ${SPARK_MASTER_HOST}:7077'
