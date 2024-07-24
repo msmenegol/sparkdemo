@@ -14,9 +14,8 @@ services:
     environment:
       - SPARK_NO_DAEMONIZE=${SPARK_NO_DAEMONIZE}
       - SPARK_WORKER_WEBUI_PORT=9091
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=6G
-      - SPARK_DRIVER_MEMORY=3G
     ports:
       - 9091:9091
     depends_on:
